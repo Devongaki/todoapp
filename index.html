@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="/styles/index.css" />
+    <title>Todo App</title>
+  </head>
+  <body>
+    <main>
+      <h1>Create your todo list</h1>
+
+      <form>
+        <input
+          type="text"
+          id="todo-input"
+          placeholder="Add a new todo"
+          required
+        />
+        <button class="creae-task-btn" type="button" id="add-todo-button">
+          Add
+        </button>
+      </form>
+
+      <section class="todo-section">
+        <ul class="todo-list">
+          <!-- Todo items will be dynamically added here -->
+        </ul>
+        <div id="error-message"></div>
+        <div id="success-message"></div>
+
+        <button class="clear-todos-btn" type="button" id="clear-todos">
+          Clear Todos
+        </button>
+      </section>
+    </main>
+
+    <script src="./js/index.js" type="module"></script>
+  </body>
+</html>
