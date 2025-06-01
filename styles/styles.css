@@ -57,3 +57,21 @@ a:hover {
   cursor: not-allowed;
   opacity: 0.6;
 }
+
+
+.page-title {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .page-title {
+    font-size: 1.5em;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+  }
+}
