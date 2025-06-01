@@ -15,10 +15,16 @@ export function clearAllTodos() {
   localStorage.removeItem("todo");
 }
 
-export function updateTodoInStorage(todoText, completed) {
+export function updateTodoInStorage(id, completed) {
   const todos = getTodos();
   const updated = todos.map((todo) =>
-    todo.text === todoText ? { ...todo, completed } : todo
+    todo.id === id ? { ...todo, completed } : todo
   );
   saveTodos(updated);
+}
+
+export function deleteTodoFromStorage(idTodoToRemove) {
+  const todos = getTodos();
+  const updatedtodos = todos.filter(todo => todo.id !== idTodoToRemove )
+  saveTodos(updatedtodos)
 }

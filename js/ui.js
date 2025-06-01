@@ -1,5 +1,5 @@
 import { clearAllTodosButton, todoList } from "./app.js";
-import { updateTodoInStorage } from "./storage.js";
+import { updateTodoInStorage, deleteTodoFromStorage } from "./storage.js";
 
 // Creating ui element
 export function renderTodo(todo) {
@@ -18,12 +18,25 @@ export function renderTodo(todo) {
   // Handle checkbox change
   checkBox.addEventListener("change", () => {
     todo.completed = checkBox.checked;
-    updateTodoInStorage(todo.text, todo.completed);
+    updateTodoInStorage(todo.id, todo.completed);
     todoItem.style.textDecoration = todo.completed ? "line-through" : "none";
+  });
+
+  //   Create delete button
+  todoItem.dataset.id = todo.id
+  const deleteTodoBtn = document.createElement("button");
+  deleteTodoBtn.className = "delete-btn";
+  deleteTodoBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+
+  deleteTodoBtn.addEventListener("click", () => {
+    todoList.removeChild(todoItem);
+    deleteTodoFromStorage(todo.id);
+    updateClearButtonState();
   });
 
   // Add checkbox and text to the <li>
   todoItem.appendChild(checkBox);
+  todoItem.appendChild(deleteTodoBtn);
 
   // Append <li> to the list
   todoList.append(todoItem);

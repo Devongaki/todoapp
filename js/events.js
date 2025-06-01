@@ -9,7 +9,7 @@ export function createTask() {
 
   // Update local storage
   const todos = getTodos();
-  todos.push({ text: todoText, completed: false });
+  todos.push({ id: crypto.randomUUID(), text: todoText, completed: false });
   saveTodos(todos);
 
   // Render new task
