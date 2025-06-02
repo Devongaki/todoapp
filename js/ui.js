@@ -39,6 +39,37 @@ export function renderTodo(todo) {
   editButton.innerHTML = '<i class="fa-solid fa-pen"></i>';
   editButton.className = "edit-btn";
 
+  editButton.addEventListener("click", () => {
+    todoItem.style.textDecoration = "none";
+
+    const newInput = document.createElement("input");
+    newInput.type = "text";
+    newInput.value = todo.text;
+    newInput.className = "edit-input";
+
+    const saveButton = document.createElement("button");
+    saveButton.textContent = "Save";
+    saveButton.className = "save-btn";
+
+    checkBox.disabled = true;
+
+    editButton.style.display = "none";
+
+    // Replace the textSpan with the input and save button
+    todoContentWrapper.replaceChild(newInput, textSpan);
+    actionButtonsContainer.insertBefore(saveButton, deleteTodoBtn);
+
+    saveButton.addEventListener("click", () => {
+      const newText = newInput.value.trim();
+      if (!newText) return;
+
+      updateTodoText(todo.id, newText);
+
+      todoList.innerHTML = "";
+      getTodos().forEach(renderTodo);
+    });
+  });
+
   // === Apply visual state ===
   if (todo.completed) {
     todoItem.style.textDecoration = "line-through";
@@ -83,7 +114,7 @@ export function updateClearButtonState() {
 function updateTodoText(id, newText) {
   const todos = getTodos();
   const updated = todos.map((todo) =>
-    todo.id === id ? { ...todos, text: newText } : todo
+    todo.id === id ? { ...todo, text: newText } : todo
   );
   saveTodos(updated);
 }
