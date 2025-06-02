@@ -1,5 +1,10 @@
 import { clearAllTodosButton, todoList } from "./app.js";
-import { updateTodoInStorage, deleteTodoFromStorage } from "./storage.js";
+import {
+  updateTodoInStorage,
+  deleteTodoFromStorage,
+  saveTodos,
+  getTodos,
+} from "./storage.js";
 
 // Renders a single todo item in the DOM
 export function renderTodo(todo) {
@@ -10,6 +15,9 @@ export function renderTodo(todo) {
 
   const todoContentWrapper = document.createElement("div");
   todoContentWrapper.className = "todo-content";
+
+  const actionButtonsContainer = document.createElement("div");
+  actionButtonsContainer.className = "todo-actions";
 
   // Create a checkbox
   const checkBox = document.createElement("input");
@@ -25,6 +33,11 @@ export function renderTodo(todo) {
   const deleteTodoBtn = document.createElement("button");
   deleteTodoBtn.className = "delete-btn";
   deleteTodoBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+
+  // Edit button
+  const editButton = document.createElement("button");
+  editButton.innerHTML = '<i class="fa-solid fa-pen"></i>';
+  editButton.className = "edit-btn";
 
   // === Apply visual state ===
   if (todo.completed) {
@@ -50,8 +63,11 @@ export function renderTodo(todo) {
   todoContentWrapper.appendChild(checkBox);
   todoContentWrapper.appendChild(textSpan);
 
+  actionButtonsContainer.appendChild(editButton);
+  actionButtonsContainer.appendChild(deleteTodoBtn);
+
   todoItem.appendChild(todoContentWrapper);
-  todoItem.appendChild(deleteTodoBtn);
+  todoItem.appendChild(actionButtonsContainer);
   todoList.append(todoItem);
 
   updateClearButtonState();
@@ -62,4 +78,12 @@ export function updateClearButtonState() {
   const isEmpty = todoList.children.length === 0;
   clearAllTodosButton.classList.toggle("disabled", isEmpty);
   clearAllTodosButton.disabled = isEmpty;
+}
+
+function updateTodoText(id, newText) {
+  const todos = getTodos();
+  const updated = todos.map((todo) =>
+    todo.id === id ? { ...todos, text: newText } : todo
+  );
+  saveTodos(updated);
 }
