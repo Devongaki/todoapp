@@ -1,49 +1,63 @@
 import { clearAllTodosButton, todoList } from "./app.js";
 import { updateTodoInStorage, deleteTodoFromStorage } from "./storage.js";
 
-// Creating ui element
+// Renders a single todo item in the DOM
 export function renderTodo(todo) {
+  // === Create elements ===
   const todoItem = document.createElement("li");
-  todoItem.textContent = todo.text;
-  todoItem.classList = "todo-item";
-  if (todo.completed) {
-    todoItem.style.textDecoration = "line-through";
-  }
+  todoItem.className = "todo-item";
+  todoItem.dataset.id = todo.id;
+
+  const todoContentWrapper = document.createElement("div");
+  todoContentWrapper.className = "todo-content";
+
   // Create a checkbox
   const checkBox = document.createElement("input");
   checkBox.type = "checkbox";
-  checkBox.classList.add("todo-checkbox");
+  checkBox.className = "todo-checkbox";
   checkBox.checked = todo.completed;
 
-  // Handle checkbox change
+  // Create text span
+  const textSpan = document.createElement("span");
+  textSpan.textContent = todo.text;
+
+  // Delete button
+  const deleteTodoBtn = document.createElement("button");
+  deleteTodoBtn.className = "delete-btn";
+  deleteTodoBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+
+  // === Apply visual state ===
+  if (todo.completed) {
+    todoItem.style.textDecoration = "line-through";
+  }
+
+  // === Attach event listeners ===
   checkBox.addEventListener("change", () => {
     todo.completed = checkBox.checked;
     updateTodoInStorage(todo.id, todo.completed);
     todoItem.style.textDecoration = todo.completed ? "line-through" : "none";
   });
 
-  //   Create delete button
-  todoItem.dataset.id = todo.id
-  const deleteTodoBtn = document.createElement("button");
-  deleteTodoBtn.className = "delete-btn";
-  deleteTodoBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
-
   deleteTodoBtn.addEventListener("click", () => {
     todoList.removeChild(todoItem);
     deleteTodoFromStorage(todo.id);
+    console.log("Deleting todo with id:", todo.id);
+
     updateClearButtonState();
   });
 
-  // Add checkbox and text to the <li>
-  todoItem.appendChild(checkBox);
-  todoItem.appendChild(deleteTodoBtn);
+  // === Build DOM structure ===
+  todoContentWrapper.appendChild(checkBox);
+  todoContentWrapper.appendChild(textSpan);
 
-  // Append <li> to the list
+  todoItem.appendChild(todoContentWrapper);
+  todoItem.appendChild(deleteTodoBtn);
   todoList.append(todoItem);
 
   updateClearButtonState();
 }
 
+// Toggles clear-all button based on list state
 export function updateClearButtonState() {
   const isEmpty = todoList.children.length === 0;
   clearAllTodosButton.classList.toggle("disabled", isEmpty);

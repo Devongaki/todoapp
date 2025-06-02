@@ -9,11 +9,16 @@ export function createTask() {
 
   // Update local storage
   const todos = getTodos();
-  todos.push({ id: crypto.randomUUID(), text: todoText, completed: false });
+  const newTodo = {
+    id: crypto.randomUUID(),
+    text: todoText,
+    completed: false,
+  };
+  todos.push(newTodo);
   saveTodos(todos);
 
   // Render new task
-  renderTodo({ text: todoText, completed: false });
+  renderTodo(newTodo);
   createTaskInput.value = "";
 
   updateClearButtonState();

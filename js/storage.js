@@ -10,7 +10,6 @@ export function saveTodos(todosArray) {
 }
 
 // Remove from local storage
-
 export function clearAllTodos() {
   localStorage.removeItem("todo");
 }
