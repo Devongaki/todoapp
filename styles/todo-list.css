@@ -35,6 +35,9 @@
   margin-right: 1rem;
   font-size: 1rem;
   color: #222;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 12px;
 }
 
 .complete-todo {
