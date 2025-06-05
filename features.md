@@ -1,7 +1,7 @@
 # ✅ Todo App Feature Checklist
 
 ## 🔹 Basic Enhancements
-- [ ] Edit a todo item
+- [x] Edit a todo item
 - [ ] Filter todos (All / Completed / Incomplete)
 - [ ] Persistent filter state (save in localStorage)
 - [ ] Show date/time created for each todo

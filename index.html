@@ -13,36 +13,63 @@
     <title>Todo App</title>
   </head>
   <body>
-    <main>
-      <h1 class="page-title">Create your todo list</h1>
+    <div class="container">
+      <main class="main-container">
+        <h1 class="page-title">My Todo Board</h1>
 
-      <form id="todo-form">
-        <div class="input-button-wrapper">
-          <input
-            type="text"
-            id="todo-input"
-            placeholder="Add a new todo"
-            required
-          />
-          <button class="create-task-btn" type="button" id="add-todo-button">
-            Add
+        <!-- Search + Filter Controls -->
+        <section class="top-controls">
+          <form id="todo-form" class="todo-form">
+            <div class="input-button-wrapper">
+              <input
+                type="text"
+                id="todo-input"
+                placeholder="Add a new task"
+                required
+              />
+              <button
+                type="button"
+                id="add-todo-button"
+                class="create-task-btn"
+              >
+                Add
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Kanban Board -->
+        <section class="kanban-board">
+          <div class="kanban-column" data-status="todo">
+            <h2><i class="fa-regular fa-circle"></i> To Do</h2>
+            <ul class="todo-list" id="todo-column"></ul>
+          </div>
+          <div class="kanban-column" data-status="inprogress">
+            <h2><i class="fa-solid fa-spinner"></i> In Progress</h2>
+            <ul class="todo-list" id="inprogress-column"></ul>
+          </div>
+          <div class="kanban-column" data-status="done">
+            <h2><i class="fa-solid fa-check-circle"></i> Done</h2>
+            <ul class="todo-list" id="done-column"></ul>
+          </div>
+        </section>
+
+        <!-- Clear & Messages -->
+        <section class="footer-controls">
+          <div id="error-message"></div>
+          <div id="success-message"></div>
+
+          <button class="clear-todos-btn" type="button" id="clear-todos">
+            Clear All Todos
           </button>
-        </div>
-      </form>
+        </section>
+      </main>
 
-      <section class="todo-section">
-        <ul class="todo-list">
-          <!-- Todo items will be dynamically added here -->
-        </ul>
-        <div id="error-message"></div>
-        <div id="success-message"></div>
+      <footer class="footer">
+        <p>&copy; 2025 Your Name. All rights reserved.</p>
+      </footer>
+    </div>
 
-        <button class="clear-todos-btn" type="button" id="clear-todos">
-          Clear Todos
-        </button>
-      </section>
-    </main>
-
-    <script src="./js/app.js" type="module"></script>
+    <script src="./js/app.js" type="module" defer></script>
   </body>
 </html>

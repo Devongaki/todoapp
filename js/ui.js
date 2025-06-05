@@ -1,4 +1,4 @@
-import { clearAllTodosButton, todoList } from "./app.js";
+import { clearAllTodosButton, todoList, columns } from "./dom.js";
 import {
   updateTodoInStorage,
   deleteTodoFromStorage,
@@ -90,6 +90,14 @@ export function renderTodo(todo) {
     updateClearButtonState();
   });
 
+const statusColumn = document.getElementById(`${todo.status}-column`);
+
+
+  todoItem.draggable = true;
+  todoItem.addEventListener("dragstart", (e) => {
+    e.dataTransfer.setData("text/plain", todo.id);
+  });
+
   // === Build DOM structure ===
   todoContentWrapper.appendChild(checkBox);
   todoContentWrapper.appendChild(textSpan);
@@ -99,7 +107,8 @@ export function renderTodo(todo) {
 
   todoItem.appendChild(todoContentWrapper);
   todoItem.appendChild(actionButtonsContainer);
-  todoList.append(todoItem);
+
+  statusColumn.appendChild(todoItem);
 
   updateClearButtonState();
 }
@@ -118,3 +127,31 @@ function updateTodoText(id, newText) {
   );
   saveTodos(updated);
 }
+
+columns.forEach((column) => {
+  column.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    column.classList.add("drag-over");
+  });
+
+  column.addEventListener("dragleave", (e) => {
+    column.classList.remove("drag-over");
+  });
+
+  column.addEventListener("drop", (e) => {
+    e.preventDefault();
+    const id = e.dataTransfer.getData("text/plain");
+    const todoItem = document.querySelector(`[data-id="${id}"]`);
+    const newStatus = column.dataset.status;
+
+    const list = column.querySelector("ul");
+    list.appendChild(todoItem);
+
+    const todos = getTodos();
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, status: newStatus } : todo
+    );
+
+    saveTodos(updatedTodos);
+  });
+});

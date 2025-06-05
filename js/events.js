@@ -1,4 +1,4 @@
-import { todoList, createTaskInput } from "./app.js";
+import { todoList, createTaskInput } from "./dom.js";
 import { updateClearButtonState, renderTodo } from "./ui.js";
 import { clearAllTodos, getTodos, saveTodos } from "./storage.js";
 
@@ -13,6 +13,7 @@ export function createTask() {
     id: crypto.randomUUID(),
     text: todoText,
     completed: false,
+    status: 'todo'
   };
   todos.push(newTodo);
   saveTodos(todos);

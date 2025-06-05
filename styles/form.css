@@ -3,19 +3,27 @@ form {
   max-width: 450px;
 }
 
+.visually-hidden {
+visibility: hidden;
+display: none;
+}
 .input-button-wrapper {
   position: relative;
   width: 100%;
+  display: flex;
 }
 
 #todo-input {
-  width: 100%;
-  padding: 1rem 6rem 1rem 1rem; /* Add right padding for button space */
+  flex: 1;
+  padding: 1rem;
+  border-radius: 5px 0 0 5px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1rem;
-  box-sizing: border-box;
 }
+
+#create-task-btn {
+  border-radius: 0 5px 5px 0;
+}
+
 
 #todo-input:focus {
   border-color: #007bff;
