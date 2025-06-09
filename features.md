@@ -2,13 +2,11 @@
 
 ## 🔹 Basic Enhancements
 - [x] Edit a todo item
-- [ ] Filter todos (All / Completed / Incomplete)
-- [ ] Persistent filter state (save in localStorage)
 - [ ] Show date/time created for each todo
 
 ## 🔸 Intermediate Features
 - [ ] Inline editing (double-click to edit)
-- [ ] Reorder todos with drag and drop
+- [x] Reorder todos with drag and drop
 - [ ] Theme toggle (light/dark mode)
 - [ ] Keyboard accessibility (Enter, Tab, Escape, Delete)
 
