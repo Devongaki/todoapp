@@ -1,8 +1,8 @@
 import { todoList, createTaskInput } from "./dom.js";
-import { updateClearButtonState, renderTodo } from "./ui.js";
+import { renderTodo } from "./ui.js";
 import { clearAllTodos, getTodos, saveTodos } from "./storage.js";
+import { updateClearButtonState } from "./handlers.js";
 
-// Function to create a new todo
 export function createTask() {
   const todoText = createTaskInput.value.trim();
   if (!todoText) return;
@@ -13,7 +13,7 @@ export function createTask() {
     id: crypto.randomUUID(),
     text: todoText,
     completed: false,
-    status: 'todo'
+    status: "todo",
   };
   todos.push(newTodo);
   saveTodos(todos);
@@ -28,6 +28,5 @@ export function createTask() {
 export function clearAllTodoFunction() {
   clearAllTodos();
   todoList.innerHTML = "";
-
   updateClearButtonState();
 }
