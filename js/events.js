@@ -14,6 +14,7 @@ export function createTask() {
     text: todoText,
     completed: false,
     status: "todo",
+    createdAt: new Date().toISOString(),
   };
   todos.push(newTodo);
   saveTodos(todos);

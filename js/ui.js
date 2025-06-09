@@ -9,6 +9,7 @@ import {
   handleDragAndLeave,
   handleDrop,
 } from "./handlers.js";
+import { formatDate } from "./utils/date.js";
 
 export function renderTodo(todo) {
   const todoItem = document.createElement("li");
@@ -30,6 +31,10 @@ export function renderTodo(todo) {
   // Create text span
   const textSpan = document.createElement("span");
   textSpan.textContent = todo.text;
+
+  const timeStamp = document.createElement("small");
+  timeStamp.className = "todo-timestamp";
+  timeStamp.textContent = formatDate(todo.createdAt);
 
   // Delete button
   const deleteTodoBtn = document.createElement("button");
@@ -89,6 +94,7 @@ export function renderTodo(todo) {
 
   todoItem.appendChild(todoContentWrapper);
   todoItem.appendChild(actionButtonsContainer);
+  todoItem.appendChild(timeStamp);
 
   statusColumn.appendChild(todoItem);
 
