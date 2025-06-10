@@ -12,7 +12,6 @@ export function handleEditClick(
   todo,
   todoContentWrapper,
   actionButtonsContainer,
-  checkBox,
   textSpan,
   deleteTodoBtn,
   editButton
@@ -28,7 +27,6 @@ export function handleEditClick(
   saveButton.textContent = "Save";
   saveButton.className = "save-btn";
 
-  checkBox.disabled = true;
   editButton.style.display = "none";
 
   // Replace the textSpan with the input and add save button
@@ -45,7 +43,6 @@ export function handleEditClick(
       todo,
       todoContentWrapper,
       actionButtonsContainer,
-      checkBox,
       editButton
     );
   });
@@ -59,7 +56,6 @@ export function handleEditClick(
       if (actionButtonsContainer.contains(saveButton)) {
         actionButtonsContainer.removeChild(saveButton);
       }
-      checkBox.disabled = false;
       editButton.style.display = "inline-block";
       newInput.blur();
     }
@@ -71,7 +67,6 @@ export function handleEditClick(
         todo,
         todoContentWrapper,
         actionButtonsContainer,
-        checkBox,
         editButton
       );
     }
@@ -85,7 +80,6 @@ export function handleSaveEdit(
   todo,
   todoContentWrapper,
   actionButtonsContainer,
-  checkBox,
   editButton
 ) {
   const newText = newInput.value.trim();
@@ -110,15 +104,7 @@ export function handleSaveEdit(
     actionButtonsContainer.removeChild(saveButton);
   }
 
-  // Re-enable the checkbox and show edit button again
-  checkBox.disabled = false;
   editButton.style.display = "inline-block";
-}
-
-export function handleCheckboxCheckout(todo, checkBox, todoItem) {
-  todo.completed = checkBox.checked;
-  updateTodoInStorage(todo.id, todo.completed);
-  todoItem.style.textDecoration = todo.completed ? "line-through" : "none";
 }
 
 export function handleDeleteClick(todoItem, todo) {

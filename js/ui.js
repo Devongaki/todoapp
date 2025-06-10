@@ -1,7 +1,6 @@
 import { columns } from "./dom.js";
 import { saveTodos, getTodos } from "./storage.js";
 import {
-  handleCheckboxCheckout,
   handleEditClick,
   handleDeleteClick,
   updateClearButtonState,
@@ -21,12 +20,6 @@ export function renderTodo(todo) {
 
   const actionButtonsContainer = document.createElement("div");
   actionButtonsContainer.className = "todo-actions";
-
-  // Create a checkbox
-  const checkBox = document.createElement("input");
-  checkBox.type = "checkbox";
-  checkBox.className = "todo-checkbox";
-  checkBox.checked = todo.completed;
 
   // Create text span
   const textSpan = document.createElement("span");
@@ -52,7 +45,6 @@ export function renderTodo(todo) {
       todo,
       todoContentWrapper,
       actionButtonsContainer,
-      checkBox,
       textSpan,
       deleteTodoBtn,
       editButton
@@ -67,14 +59,6 @@ export function renderTodo(todo) {
     }
   });
 
-  if (todo.completed) {
-    todoItem.style.textDecoration = "line-through";
-  }
-
-  checkBox.addEventListener("change", () => {
-    handleCheckboxCheckout(todo, checkBox, todoItem);
-  });
-
   deleteTodoBtn.addEventListener("click", () =>
     handleDeleteClick(todoItem, todo, todoItem)
   );
@@ -86,7 +70,6 @@ export function renderTodo(todo) {
     e.dataTransfer.setData("text/plain", todo.id);
   });
 
-  todoContentWrapper.appendChild(checkBox);
   todoContentWrapper.appendChild(textSpan);
 
   actionButtonsContainer.appendChild(editButton);
@@ -94,8 +77,8 @@ export function renderTodo(todo) {
 
   todoItem.appendChild(todoContentWrapper);
   todoItem.appendChild(actionButtonsContainer);
-  todoItem.appendChild(timeStamp);
 
+  todoItem.appendChild(timeStamp);
   statusColumn.appendChild(todoItem);
 
   updateClearButtonState();
