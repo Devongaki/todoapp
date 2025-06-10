@@ -134,6 +134,11 @@ body {
   flex-grow: 1;
 }
 
+.todo-content.done {
+  text-decoration: line-through;
+  color: #888;
+}
+
 .todo-text {
   flex-grow: 1;
   font-weight: 500;
