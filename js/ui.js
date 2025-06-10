@@ -9,6 +9,7 @@ import {
   handleDrop,
 } from "./handlers.js";
 import { formatDate } from "./utils/date.js";
+import { applyStatusStyling } from "./helpers/helper.js";
 
 export function renderTodo(todo) {
   const todoItem = document.createElement("li");
@@ -51,7 +52,6 @@ export function renderTodo(todo) {
     );
   });
 
-  // keyboard accesibitity
   todoItem.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
     }
@@ -62,6 +62,11 @@ export function renderTodo(todo) {
   deleteTodoBtn.addEventListener("click", () =>
     handleDeleteClick(todoItem, todo, todoItem)
   );
+
+  if (todo.status === "done") {
+    todoContentWrapper.classList.add("done");
+    applyStatusStyling(todoItem, todo.status);
+  }
 
   const statusColumn = document.getElementById(`${todo.status}-column`);
 

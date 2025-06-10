@@ -6,6 +6,7 @@ import {
   getTodos,
   saveTodos,
 } from "./storage.js";
+import { applyStatusStyling } from "./helpers/helper.js";
 
 export function handleEditClick(
   todoItem,
@@ -138,6 +139,7 @@ export function handleDrop(e, column) {
   );
 
   saveTodos(updatedTodos);
+  applyStatusStyling(todoItem, newStatus);
 }
 
 export function updateClearButtonState() {
