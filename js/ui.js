@@ -65,6 +65,7 @@ export function renderTodo(todo) {
 
   if (todo.status === "done") {
     todoContentWrapper.classList.add("done");
+    actionButtonsContainer.classList.add("hidden");
     applyStatusStyling(todoItem, todo.status);
   }
 

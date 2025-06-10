@@ -154,6 +154,10 @@ body {
   gap: 0.5rem;
 }
 
+.todo-actions.hidden {
+  display: none !important;
+}
+
 .edit-btn,
 .delete-btn,
 .save-btn {
