@@ -1,7 +1,6 @@
 # ✅ Todo App Feature Checklist
 
 ## 🔹 Basic Enhancements
-- [ ] Show date/time created for each todo
 
 ## 🔸 Intermediate Features
 
@@ -25,5 +24,7 @@
 - [x] Edit a todo item
 - [x] Reorder todos with drag and drop
 - [x] Keyboard accessibility (Enter, Tab, Escape)
+- [x] Show date/time created for each todo
+
 
 
