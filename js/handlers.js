@@ -1,11 +1,6 @@
 import { updateTodoText } from "./ui.js";
 import { todoList, clearAllTodosButton } from "./dom.js";
-import {
-  updateTodoInStorage,
-  deleteTodoFromStorage,
-  getTodos,
-  saveTodos,
-} from "./storage.js";
+import { deleteTodoFromStorage, getTodos, saveTodos } from "./storage.js";
 import { applyStatusStyling } from "./helpers/helper.js";
 
 export function handleEditClick(
